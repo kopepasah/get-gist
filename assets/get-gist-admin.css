@@ -1,0 +1,46 @@
+#get-gist-wrap {
+	overflow: hidden;
+}
+#get-gist-primary,
+#get-gist-secondary {
+	float: left;
+}
+#get-gist-primary {
+	width: 80%;
+}
+#get-gist-secondary {
+	width: 20%;
+}
+#get-gist-secondary .get-gist-inner {
+	overflow: hidden;
+	padding: 1.5em;
+	background: #FFF;
+	border: 1px solid #CCCCCC;
+}
+#get-gist-secondary .author-avatar {
+	margin: 0;
+	max-width: 80px;
+	float: left;
+}
+#get-gist-secondary .author-avatar img {
+	max-width: 100%;
+	height: auto;
+}
+#get-gist-secondary .author-info {
+	float: left;
+	margin-left: 1.5em;
+}
+#get-gist-secondary .author-info .info-heading {
+	margin: 0;
+	font-size: 1em;
+}
+#get-gist-secondary .author-info .info-name {
+	font-size: 1.5em;
+	margin-top: 0;
+}
+#get-gist-secondary .author-info a.wepay-widget-button {
+	margin-left: 10px;
+	min-width: 0;
+	font-family: inherit;
+	text-shadow: none;
+}

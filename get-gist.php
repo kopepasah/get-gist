@@ -6,6 +6,7 @@ Description: A simple plugin that adds a gist shortcode for getting a single gis
 Version: 1.0.0
 Author: Justin Kopepasah
 Author URI: http://kopepasah.com/ 
+Text Domain: get-gist
 */
 
 /**
@@ -32,18 +33,86 @@ Author URI: http://kopepasah.com/
 
 class Get_Gist {
 	
+	public $version = '1.0.0';
+	public $text_domain = 'get-gist';
+	
 	function __construct() {
+		add_action( 'admin_menu', array( $this, 'settings_submenu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		add_shortcode( 'gist', array( $this, 'shortcode' ) );
+	}
+	
+	function settings_submenu() {
+		add_submenu_page( 'options-general.php', __( 'Get Gist', $this->text_domain ), __( 'Get Gist', $this->text_domain ), 'manage_options', $this->text_domain, array( $this, 'options_page' ) );
+	}
+	
+	function options_page() {
+		?>
+			<div id="get-gist-wrap" class="wrap">
+	 			<h2><?php _e( 'Get Gist', $this->text_domain ); ?></h2>
+				
+				<div id="get-gist-primary">
+					<form method="post" action="options.php">
+						<?php wp_nonce_field('update-options'); ?>
+					
+						<table class="form-table">
+							<tr valign="top">
+								<th scope="row"><?php _e( 'Personal Access Token', $this->text_domain ); ?></th>
+								<td>
+									<input type="text" name="get_gist_github_access_token" value="<?php echo get_option( 'get_gist_github_access_token' ); ?>" />
+									<p class="description"><?php _e( 'By default, non authorized Gists get a max of 60 views per hour limit. To get the normal 5000 views per hour limit, enter your personal Gist API Token here.', $this->text_domain ) ?></p>
+								</td>
+							</tr>
+						</table>
+						<input type="hidden" name="action" value="update" />
+						<input type="hidden" name="page_options" value="get_gist_github_access_token" />
+					
+						<p class="submit">
+							<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+						</p>
+					</form>
+				</div>
+				
+				<div id="get-gist-secondary">
+					<div class="get-gist-inner">
+						<div class="author-profile">
+							<figure class="author-avatar">
+								<?php echo get_avatar( 'justin@kopepasah.com', '250' ); ?>
+							</figure>
+							<div class="author-info">
+								<h3 class="info-heading"><?php _e( 'Created &amp; maintained by', 'LION' ); ?></h3>
+								<h2 class="info-name">Justin Kopepasah</h2>
+								<p class="info-links"><a href="http://kopepasah.com" target="_blank" class="button"><?php _e( 'Website', 'LION' ); ?></a><a class="wepay-widget-button button" id="wepay_widget_anchor_52cc5c7dd6ac5" href="https://www.wepay.com/donations/1203508425">Donate</a><script type="text/javascript">var WePay = WePay || {};WePay.load_widgets = WePay.load_widgets || function() { };WePay.widgets = WePay.widgets || [];WePay.widgets.push( {object_id: 1203508425,widget_type: "donation_campaign",anchor_id: "wepay_widget_anchor_52cc5c7dd6ac5",widget_options: {list_suggested_donations: true,allow_cover_fee: true,enable_recurring: true,allow_anonymous: true,reference_id: ""}});if (!WePay.script) {WePay.script = document.createElement('script');WePay.script.type = 'text/javascript';WePay.script.async = true;WePay.script.src = 'https://static.wepay.com/min/js/widgets.v2.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(WePay.script, s);} else if (WePay.load_widgets) {WePay.load_widgets();}</script></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php
+	}
+	
+	function admin_scripts() {
+		if ( 'settings_page_get-gist' == get_current_screen()->id ) {
+			wp_enqueue_style( 'get-gist-css', plugins_url( 'assets/get-gist-admin.css', __FILE__ ), false, $this->version );
+		}
 	}
 	
 	function get_data( $url ) {
 		$timeout = 5;
+		
+		$token = get_option( 'get_gist_github_access_token' );
+		
 		$ch = curl_init();
+		if ( ! empty( $token ) ) {
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, 'Authorization: token ' . $token );
+		}
 		curl_setopt( $ch, CURLOPT_URL, $url );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
 		curl_setopt( $ch, CURLOPT_USERAGENT, 'Get-Gist' );
+		
 		$data = curl_exec( $ch );
+		
 		curl_close( $ch );
 		
 		return $data;
