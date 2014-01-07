@@ -60,7 +60,7 @@ class Get_Gist {
 								<th scope="row"><?php _e( 'Personal Access Token', $this->text_domain ); ?></th>
 								<td>
 									<input type="text" name="get_gist_github_access_token" value="<?php echo get_option( 'get_gist_github_access_token' ); ?>" />
-									<p class="description"><?php _e( 'By default, non authorized Gists get a max of 60 views per hour limit. To get the normal 5000 views per hour limit, enter your personal Gist API Token here.', $this->text_domain ) ?></p>
+									<p class="description"><?php _e( 'By default, unauthenticated requests will be limited to 60 per hour. To get the normal 5000 views per hour, enter your personal Github API Token here.', $this->text_domain ) ?></p>
 								</td>
 							</tr>
 						</table>
@@ -147,7 +147,7 @@ class Get_Gist {
 			$output = '';
 			
 			foreach ( $gist->files as $name ) {
-
+				
 				if ( true == $synhi ) {
 					$language = strtolower( $name->language );
 					
