@@ -104,7 +104,7 @@ class Get_Gist {
 		
 		$ch = curl_init();
 		if ( ! empty( $token ) ) {
-			curl_setopt( $ch, CURLOPT_HTTPHEADER, 'Authorization: token ' . $token );
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Authorization: token ' . $token ) );
 		}
 		curl_setopt( $ch, CURLOPT_URL, $url );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
