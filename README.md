@@ -5,7 +5,7 @@ A simple WordPress plugin that adds a gist shortcode for getting a single Gist a
 ##Usage
 Get a Gist using a WordPress shortcode: `[gist id=00000000 file=file-name.php]`
 
-The Gist will return as plain text. I recommend using WordPress plugin Syntaxhighlighter Evolved to highlight the Gist. See below for details.
+The Gist will return as plain text. I recommend using WordPress plugin [Syntaxhighlighter Evolved](http://wordpress.org/plugins/syntaxhighlighter/) to highlight the Gist. See below for details.
 
 ##Options
 | Option | Value      | Default    | Description                                           | Note                                                                  |

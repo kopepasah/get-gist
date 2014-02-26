@@ -4,7 +4,7 @@ Donate link: http://kopepasah.com/donate/
 Tags: gist, github
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.1.1
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,28 +12,16 @@ A simple WordPress plugin that adds a gist shortcode for getting a single Gist a
 
 == Description ==
 
-#Get Gist
-
 A simple WordPress plugin that adds a gist shortcode for getting a single Gist and the files within. It uses the Gist V3 API. Has the option for authentication via Personal Access Token. 
 
-##Usage
+__Usage__
 Get a Gist using a WordPress shortcode: `[gist id=00000000 file=file-name.php]`
 
 The Gist will return as plain text. I recommend using WordPress plugin Syntaxhighlighter Evolved to highlight the Gist. See below for details.
 
-##Options
-| Option | Value      | Default    | Description                                           | Note                                                                  |
-| ------ | ---------- | ---------- | ----------------------------------------------------- | --------------------------------------------------------------------- |
-| id     | numeric    | null       | The id of the Gist.                                   | Required.                                                             |
-| file   | string     | null       | The file name.                                        | Optional. Using no file name will return all files.                   |
-| synhi  | true/false | false      | Highlight the gist.                                   | Optional, but requires Syntaxhighlighter Evolved Plugin for WordPress |
-| wrap   | true/false | false      | Wrap the highlighted gist with .syntax-wrapper class. | Optional, but requires synhi to be true.                              |
+Visit [Get Gist on Github](http://https://github.com/kopepasah/get-gist “Get Gist”) for more options and information.
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 1. Upload `get-gist` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
@@ -57,3 +45,6 @@ Have a question?
 
 = 1.1.1 =
 * Added readme.txt.
+
+= 1.1.3 =
+* Updated some information.

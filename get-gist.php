@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Get Gist
-Plugin URI: http://kopepasah.com/get-gist
+Plugin URI: https://github.com/kopepasah/get-gist
 Description: A simple plugin that adds a gist shortcode for getting a single gist and the files within. It uses the Gist V3 API.
-Version: 1.0.0
+Version: 1.1.3
 Author: Justin Kopepasah
 Author URI: http://kopepasah.com/ 
 Text Domain: get-gist
@@ -33,7 +33,7 @@ Text Domain: get-gist
 
 class Get_Gist {
 	
-	public $version = '1.0.0';
+	public $version = '1.1.3';
 	public $text_domain = 'get-gist';
 	
 	function __construct() {
